@@ -1,6 +1,6 @@
 % VL_DSIFT  Dense SIFT
 %   [FRAMES,DESCRS] = VL_DSIFT(I) extracts a dense set of SIFT
-%   keypoints from image I. I must be of class SINGLE and grayscale.
+%   features from image I. I must be of class SINGLE and grayscale.
 %   FRAMES is a 2 x NUMKEYPOINTS, each colum storing the center (X,Y)
 %   of a keypoint frame (all frames have the same scale and
 %   orientation). DESCRS is a 128 x NUMKEYPOINTS matrix with one
@@ -60,6 +60,11 @@
 %     If specified, the descriptor are returned in floating point
 %     rather than integer format.
 %
+%   Geomerty:: [4 4 8]
+%     Specify the geometry of the descriptor as [NX NY NO], where NX
+%     is the number of bin in the X direction, NY in the Y direction,
+%     and NO the nubmer of orientation bins.
+%
 %   Verbose::
 %     If specified, be verbose.
 %
@@ -115,10 +120,10 @@
 %   = 5.5. For the second descriptor immediately to its right this is
 %   5.5 + STEP, and so on.
 %
-%   See also:: VL_HELP(), VL_SIFT().
+%   See also: VL_SIFT(), VL_HELP().
 
-% AUTORIGHTS
-% Copyright (C) 2007-10 Andrea Vedaldi and Brian Fulkerson
+% Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+% All rights reserved.
 %
-% This file is part of VLFeat, available under the terms of the
-% GNU GPLv2, or (at your option) any later version.
+% This file is part of the VLFeat library and is made available under
+% the terms of the BSD license (see the COPYING file).

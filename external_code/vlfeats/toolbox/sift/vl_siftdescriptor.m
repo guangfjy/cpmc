@@ -6,7 +6,7 @@
 %   GRAD(2,:,:) contains the gradient angle (measured in radians,
 %   clockwise, starting from the X axis -- this assumes that the Y
 %   axis points down). The matrix F contains one column per keypoint
-%   with the X, Y, SGIMA and ANLGE parameters.
+%   with the X, Y, SIGMA and ANGLE parameters.
 %
 %   In order to match the standard SIFT descriptor, the gradient GRAD
 %   should be calculated after mapping the image to the keypoint
@@ -26,22 +26,28 @@
 %     grd      = single(grd) ;
 %     d        = vl_siftdescriptor(grd, f) ;
 %
-%   Remark:: The above fragment generates results which are very close
+%   Remark::
+%     The above fragment generates results which are very close
 %     but not identical to the output of VL_SIFT() as the latter
 %     samples the scale space at finite steps.
 %
-%   Remark:: For object categorization is sometimes useful to compute
+%   Remark::
+%     For object categorization is sometimes useful to compute
 %     SIFT descriptors without smoothing the image.
 %
 %   Options:
 %
-%   Magnif [3]::
+%   Magnif:: [3]
 %     Magnification factor (see VL_SIFT()).
 %
-%  See also:: VL_SIFT(), VL_HELP().
-
-% AUTORIGHTS
-% Copyright (C) 2007-10 Andrea Vedaldi and Brian Fulkerson
+%   NormThresh:: [-inf]
+%     Set the minimum l2-norm of the descriptors before
+%     normalization. Descriptors below the threshold are set to zero.
 %
-% This file is part of VLFeat, available under the terms of the
-% GNU GPLv2, or (at your option) any later version.
+%  See also: VL_SIFT(), VL_HELP().
+
+% Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+% All rights reserved.
+%
+% This file is part of the VLFeat library and is made available under
+% the terms of the BSD license (see the COPYING file).

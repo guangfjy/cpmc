@@ -3,17 +3,27 @@
  ** @brief  Test threaded VLFeat client
  **/
 
-/* AUTORIGHTS
- Copyright (C) 2007-09 Andrea Vedaldi and Brian Fulkerson
+/*
+Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+Copyright (C) 2013 Andrea Vedaldi.
+All rights reserved.
 
- This file is part of VLFeat, available in the terms of the GNU
- General Public License version 2.
- */
+This file is part of the VLFeat library and is made available under
+the terms of the BSD license (see the COPYING file).
+*/
 
 #include <vl/generic.h>
 #include <vl/random.h>
 
 #include <stdio.h>
+
+#if defined(VL_THREADS_POSIX)
+#include <pthread.h>
+#endif
+
+#if defined(VL_THREADS_WIN)
+#include <Windows.h>
+#endif
 
 #if defined(VL_THREADS_POSIX)
 
@@ -54,7 +64,7 @@ testThread(LPVOID args)
 int
 main(int argc VL_UNUSED, char** argv VL_UNUSED)
 {
-#ifdef VL_ENABLE_THREADS
+#ifndef VL_DISABLE_THREADS
 #if defined(VL_THREADS_POSIX)
   vl_uindex i ;
   pthread_t threads [5] ;
@@ -80,7 +90,7 @@ main(int argc VL_UNUSED, char** argv VL_UNUSED)
     WaitForSingleObject (threadHandles[i], INFINITE);
   }
 #endif
-/* VL_ENABLE_THREADS */
+/* VL_DISABLE_THREADS */
 #else
   printf("VLFeat was compiled without threading support\n") ;
 #endif

@@ -1,8 +1,8 @@
 % VL_DEMO_IMDISTTF Demonstrates image distance transform
 
 % load image
-im = imread(fullfile(vl_root, 'data', 'a.jpg')) ;
-im = im(1:100,1:100,:) ;
+im = imread(fullfile(vl_root, 'data', 'roofs1.jpg')) ;
+im = im(100:200,100:200,:) ;
 imSize = [size(im,1) size(im,2)] ;
 
 % creates an edge map
@@ -26,11 +26,9 @@ figure(1) ; clf ; imagesc(im) ; axis off image ;
 figure(2) ; clf ; imagesc(edges) ; axis off image ;
 figure(3) ; clf ; imagesc(edges) ; axis off image ;
 hold on ; h = quiver(u,v,u_-u,v_-v,0) ; colormap gray ;
-figure(4) ; clf ; imagesc(distanceTransform) ; axis off image ;
+figure(4) ; clf ; imagesc(sqrt(distanceTransform)) ; axis off image ;
 
 figure(1) ; vl_demo_print('imdisttf_src') ;
 figure(2) ; vl_demo_print('imdisttf_edge') ;
 figure(3) ; vl_demo_print('imdisttf_neigh') ;
 figure(4) ; vl_demo_print('imdisttf_dist') ;
-
-

@@ -1,30 +1,37 @@
 function [Ix,Iy] = vl_grad(I,varargin) ;
 % VL_GRAD Compute the gradient of an image
-%   [Ix,Iy] = VL_GRAD(I) returns the finite differences gradient of
-%   the image I. I must be a 2D array. The function uses central
-%   differences and for all but the boundaries pixels, for which it
-%   uses forward/backward differences as appropriate.
+%   [IX,IY] = VL_GRAD(I) returns the gradient components IX,IY of the
+%   2-D discrete function I. I must be a two-dimensional
+%   matrix. VL_GRAD() computes the gradient by using finite
+%   differences; specifically, it uses central differences for all but
+%   the boundary pixels, for which it uses forward/backward
+%   differences as appropriate.
 %
-%   VL_GRAD(I,'forward') uses only forward differences (except on the
-%   lower and right boundaries, where backward difference is used).
-%   Similarly, VL_GRAD(I,'backward') uses only backward differences.
+%   Remark::
+%     VL_GRAD() is similar to the MATLAB built-in GRADIENT() function,
+%     excepts that it supports different gradient approximations.
+%
+%   VL_GRAD() accepts the following options:
+%
+%   Type:: central
+%     Specify which type of finite differences to use for all but the
+%     boundary samples. TYPE can be one of 'central', 'forward', or
+%     'backward'.
 %
 %   See also: GRADIENT(), VL_HELP().
 
-% Author: Andrea Vedaldi
+% Authors: Andrea Vedaldi
 
-% AUTORIGHTS
-% Copyright (C) 2007-10 Andrea Vedaldi and Brian Fulkerson
+% Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+% All rights reserved.
 %
-% This file is part of VLFeat, available under the terms of the
-% GNU GPLv2, or (at your option) any later version.
+% This file is part of the VLFeat library and is made available under
+% the terms of the BSD license (see the COPYING file).
 
 opts.type = 'central' ;
 opts = vl_argparse(opts, varargin) ;
 
-[M,N]=size( F ) ;
-
-switch opts.type
+switch lower(opts.type)
   case 'central'
     Ix = [ I(:,2)-I(:,1) , ...
            0.5*(I(:,3:end)-I(:,1:end-2)) , I(:,end)-I(:,end-1) ] ;
@@ -39,4 +46,3 @@ switch opts.type
   otherwise
     error('Difference type ''%s'' unknown.', opts.type) ;
 end
-

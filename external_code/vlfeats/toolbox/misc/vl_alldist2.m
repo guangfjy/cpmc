@@ -44,26 +44,26 @@
 %  same storage class. The sotrage class of D is promoted to reduce
 %  the chance of overvlow, but this is not checked.
 %
-%    X & Y class      D class  
+%    X & Y class      D class
 %   ---------------------------
-%    UINT8            UINT32   
-%     INT8             INT32   
-%    UINT16           UINT32   
-%     INT16            INT32   
-%    UINT32           UINT32   
-%     INT32            INT32   
-%    SINGLE           SINGLE   
-%    DOUBLE           DOUBLE   
+%    UINT8            UINT32
+%     INT8             INT32
+%    UINT16           UINT32
+%     INT16            INT32
+%    UINT32           UINT32
+%     INT32            INT32
+%    SINGLE           SINGLE
+%    DOUBLE           DOUBLE
 %
 %  Warning: Both chi2 and kchi2 use integer math when presented with
 %  integer data types. This can easily result in zeros where you did
 %  not expect them.
 %
-%  See also:: VL_HELP().
+%  See also: VL_HELP().
 
 
-% AUTORIGHTS
-% Copyright (C) 2007-10 Andrea Vedaldi and Brian Fulkerson
+% Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+% All rights reserved.
 %
-% This file is part of VLFeat, available under the terms of the
-% GNU GPLv2, or (at your option) any later version.
+% This file is part of the VLFeat library and is made available under
+% the terms of the BSD license (see the COPYING file).

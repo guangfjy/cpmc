@@ -16,13 +16,13 @@ function [phi,S] = vl_tps(x1,x2,Y)
 %   [PHI,S] = VL_TPS(X1,X2,Y) additionally returns the stiffness matrix S
 %   of the TPS.
 %
-%   See also:: VL_WTPS(), VL_HELP().
+%   See also: VL_WTPS(), VL_HELP().
 
-% AUTORIGHTS
-% Copyright (C) 2007-10 Andrea Vedaldi and Brian Fulkerson
+% Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+% All rights reserved.
 %
-% This file is part of VLFeat, available under the terms of the
-% GNU GPLv2, or (at your option) any later version.
+% This file is part of the VLFeat library and is made available under
+% the terms of the BSD license (see the COPYING file).
 
 X = [x1(:)';x2(:)'] ;
 
@@ -41,5 +41,5 @@ phi = reshape(phi,K+3,M,N) ;
 if nargout > 1
   % See Bookstein; note that here the terms are re-arranged a bit
   invLn = invL(1:K, end-K+1:end) ;
-  S = invLn * U * invLn ;		
+  S = invLn * U * invLn ;
 end

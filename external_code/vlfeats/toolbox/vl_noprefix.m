@@ -1,7 +1,18 @@
 function vl_noprefix
-% VL_NOPREFIX  Creates a prefix-less version of VLFeat commands
+% VL_NOPREFIX  Create a prefix-less version of VLFeat commands
+%   VL_NOPREFIX() creats prefix-less stubs for VLFeat functions
+%   (e.g. SIFT for VL_SIFT). This function is seldom used as the stubs
+%   are included in the VLFeat binary distribution anyways. Moreover,
+%   on UNIX platforms, the stubs are generally constructed by the
+%   Makefile.
 %
-%   Author:: Andrea Vedaldi
+%   See also: VL_COMPILE(), VL_HELP().
+
+% Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+% All rights reserved.
+%
+% This file is part of the VLFeat library and is made available under
+% the terms of the BSD license (see the COPYING file).
 
 root = fileparts(which(mfilename)) ;
 list = listMFilesX(root);
@@ -16,13 +27,13 @@ for li = 1:length(list)
   nname = name(4:end) ; % remove vl_
   stubPath = fullfile(outDir, [nname '.m']) ;
   fout = fopen(stubPath, 'w') ;
-  
+
   fprintf('Creating stub %s for %s\n', stubPath, nname) ;
-  
+
   fprintf(fout, 'function varargout = %s(varargin)\n', nname) ;
   fprintf(fout, '%% %s Stub for %s\n', upper(nname), upper(name)) ;
   fprintf(fout, '[varargout{1:nargout}] = %s(varargin{:})\n', name) ;
-  
+
   fclose(fout) ;
 end
 

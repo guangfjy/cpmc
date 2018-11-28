@@ -4,11 +4,12 @@
  ** @author   Andrea Vedaldi
  **/
 
-/* AUTORIGHTS
-Copyright (C) 2007-10 Andrea Vedaldi and Brian Fulkerson
+/*
+Copyright (C) 2007-12 Andrea Vedaldi and Brian Fulkerson.
+All rights reserved.
 
-This file is part of VLFeat, available under the terms of the
-GNU GPLv2, or (at your option) any later version.
+This file is part of the VLFeat library and is made available under
+the terms of the BSD license (see the COPYING file).
 */
 
 #include <mexutils.h>
@@ -22,6 +23,7 @@ GNU GPLv2, or (at your option) any later version.
 enum {
   opt_magnif,
   opt_float_descriptors,
+  opt_norm_thresh,
   opt_verbose
 } ;
 
@@ -30,6 +32,7 @@ vlmxOption  options [] = {
   {"Magnif",           1,   opt_magnif            },
   {"Verbose",          0,   opt_verbose           },
   {"FloatDescriptors", 0,   opt_float_descriptors },
+  {"NormThresh",       1,   opt_norm_thresh       },
   {0,              0,   0                         }
 } ;
 
@@ -87,6 +90,7 @@ mexFunction(int nout, mxArray *out[],
 
   vl_bool            floatDescriptors = 0 ;
   double             magnif = -1 ;
+  double             norm_thresh = -1 ;
   double            *ikeys = 0 ;
   int                nikeys = 0 ;
 
@@ -133,6 +137,12 @@ mexFunction(int nout, mxArray *out[],
         floatDescriptors = 1 ;
         break ;
 
+      case opt_norm_thresh :
+        if (!vlmxIsPlainScalar(optarg) || (norm_thresh = *mxGetPr(optarg)) < 0) {
+          mexErrMsgTxt("NORMTHRESH must be a non-negative scalar.") ;
+        }
+        break ;
+
       default :
         abort() ;
     }
@@ -159,7 +169,7 @@ mexFunction(int nout, mxArray *out[],
     filt = vl_sift_new (M, N, -1, -1, 0) ;
 
     if (magnif >= 0) vl_sift_set_magnif (filt, magnif) ;
-
+    if (norm_thresh >= 0) vl_sift_set_norm_thresh (filt, norm_thresh) ;
     if (verbose) {
       mexPrintf("vl_siftdescriptor: filter settings:\n") ;
       mexPrintf("vl_siftdescriptor:   magnif                = %g\n",
@@ -168,6 +178,8 @@ mexFunction(int nout, mxArray *out[],
                 nikeys) ;
       mexPrintf("vl_siftdescriptor:   float descriptor      = %d\n",
                 floatDescriptors) ;
+      mexPrintf("vl_siftdescriptor:   norm thresh           = %g\n",
+                vl_sift_get_norm_thresh (filt));
     }
 
     {

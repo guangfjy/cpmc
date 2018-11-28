@@ -10,17 +10,17 @@ switch mexext
  case 'mexmaci64'
   arch = 'maci64';
  case 'mexglx'
-	arch = 'glx' ;
+	arch = 'glnx86' ;
  case 'mexa64'
-	arch = 'a64' ;
+	arch = 'glnxa64' ;
  case 'dll'
-	arch = 'w32' ;
+	arch = 'win32' ;
 	ext = '.exe' ;
  case 'mexw32'
-	arch = 'w32' ;
+	arch = 'win32' ;
 	ext ='.exe' ;
  case 'mexw64'
-	arch = 'w64' ;
+	arch = 'win64' ;
 	ext ='.exe' ;
 end
 

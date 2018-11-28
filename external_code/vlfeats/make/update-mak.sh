@@ -14,7 +14,10 @@ function make
     # sed below removes the trailing '\' from the last entry
     (
         printf '%s \\\n' "$1 ="
-        find "$2" -name '*.c' | tr '/' '\' | while read -r x
+        find "$2" \
+            -name '*.c' \
+            -not -path 'vl/doc/*' \
+            |  tr '/' '\' | while read -r x
         do
             printf '  %s \\\n' "$x"
         done
@@ -44,7 +47,7 @@ function subv
 
 # source version string from vl/generic.h
 ver=$(cat vl/generic.h | sed -n \
-     's/.*VL_VERSION_STRING.*\(\([0-9][0-9]*\.\{0,1\}\)\{3\}\).*/\1/p')
+    's/.*VL_VERSION_STRING.*\"\([0-9.]*\)\".*/\1/p')
 
 # source current nmake script
 a=$(cat Makefile.mak)

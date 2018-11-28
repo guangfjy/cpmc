@@ -14,9 +14,24 @@ function cpmc_example()
     
     % create multiple threads (set how many you have)
     N_THREADS = 12;
-    if(matlabpool('size')~=N_THREADS)
-        matlabpool('open', N_THREADS);
+    ncores=feature('numCores'); %CPU核心数
+    ncores = min(N_THREADS, ncores); %确定当前去处所需的核心数
+    p = gcp('nocreate'); %获取当前并行池信息
+    if isempty(p)
+        %并行池未打开，则打开
+        parpool(4);
+    else
+        %并行池已打开，查看线程数
+        if p.NumWorkers ~= ncores
+            %线程数不对，关闭重新打开
+            delete(p);
+            parpool(ncores);
+        end
     end
+    
+%     if(parpool('size')~=N_THREADS)
+%         parpool('open', N_THREADS);
+%     end
 
     exp_dir = './data/';
     %img_name = '2010_000238'; % airplane and people   
