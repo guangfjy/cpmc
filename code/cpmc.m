@@ -48,7 +48,7 @@ function [masks, scores] = cpmc(exp_dir, img_name, diversify_const, segm_pars)
     DefaultVal('*segm_pars', '[]');
     
     if(isempty(segm_pars))
-        segm_pars.pb_folder = [exp_dir 'PB/'];
+        segm_pars.pb_folder = [exp_dir './PB/'];
         segm_pars.name = 'dummy_masks';
 
         % UniformSegmenter uses a uniform unary term. LongRangeSegmenter

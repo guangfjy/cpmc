@@ -16,7 +16,7 @@ function D = SvmSegm_extract_all_class_features_nofiles(exp_dir, img_name, mask_
    % Histograms of gradients
    %
    
-   for i=1:numel(meas_req)
+   parfor i=1:numel(meas_req)
        filename = [exp_dir 'MyMeasurements/' mask_type '_' class_feats{i} '/' img_name{1} '.mat'];
        if(~needs_shape(i))
            filename = [exp_dir 'MyMeasurements/' meas_req{i} '/' img_name{1} '.mat'];

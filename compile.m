@@ -8,7 +8,7 @@
 %
 
 % for the other files 
-mex -O code/cartprod_mex.c -output code/cartprod_mex
+mex -O code/cartprod_mex.c -o code/cartprod_mex
 cd ./code/
 !make
 cd ..

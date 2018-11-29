@@ -9,7 +9,7 @@ function D = SvmSegm_compute_segm_feats_nofiles(exp_dir, img_name, masks, feat_t
     assert(iscell(feat_type));
 
     I = imread([exp_dir '/JPEGImages/' img_name '.jpg']);
-    for h=1:numel(feat_type)
+    parfor h=1:numel(feat_type)
         if(strcmp(feat_type{h}, 'SimpleSegmentFeatures'))
             f = SimpleSegmentFeatures(I, masks, [exp_dir 'PB/' img_name '_PB']);
         elseif(strcmp(feat_type{h}, 'GestaltSegmentFeatures'))

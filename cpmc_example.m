@@ -28,10 +28,6 @@ function cpmc_example()
             parpool(ncores);
         end
     end
-    
-%     if(parpool('size')~=N_THREADS)
-%         parpool('open', N_THREADS);
-%     end
 
     exp_dir = './data/';
     %img_name = '2010_000238'; % airplane and people   
