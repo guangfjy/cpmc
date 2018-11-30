@@ -13,18 +13,22 @@ classdef GridOfFramesSegmenter < Segmenter
 
     methods
         function obj = GridOfFramesSegmenter(I, img_name)
-            obj = obj@Segmenter(I,img_name);            
+            obj = obj@Segmenter(I,img_name);
+            
+            obj.filter_segments = true;
+            obj.MAX_ENERGY = 100; % 75
+            obj.DONT_BREAK_DISCONNECTED = false;
+            
+            obj.RECT_DIMS = [5 5];
+            obj.arrangement = 'windows';
+            obj.grid_dims = [1 1]; 
+            obj.SEED_FRAME_WEIGHT = 100;
+            
+            obj.upper_bp = 150; % 100
+            obj.resize_factor = 0.5; % 0.5
+            
             obj.subframe_dims = [150 150];
             obj.frame_grid_dims = [5 5];
-            obj.RECT_DIMS = [5 5];
-            obj.grid_dims = [1 1]; 
-            obj.upper_bp = 150; % 100
-            obj.filter_segments = true;
-            obj.SEED_FRAME_WEIGHT = 100;
-            obj.arrangement = 'windows';
-            obj.resize_factor = 0.5; % 0.5
-            obj.DONT_BREAK_DISCONNECTED = false;
-            obj.MAX_ENERGY = 100; % 75
         end
 
         function obj = set_params(obj, par)

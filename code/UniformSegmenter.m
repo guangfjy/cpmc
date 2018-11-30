@@ -14,15 +14,17 @@ classdef UniformSegmenter < Segmenter
     methods
         function obj = UniformSegmenter(I, img_name)
             obj = obj@Segmenter(I,img_name);
-
-            obj.grid_dims = [6 6];
-            obj.RECT_DIMS = [40 40]; % [25 25]
-            obj.SEED_FRAME_WEIGHT = 1000; % 500
+            
             obj.filter_segments = true;
-            obj.DONT_BREAK_DISCONNECTED = false;            
-            obj.upper_bp = 150; % 15, 15 is better than 100
-            obj.resize_factor = 0.5;         
+            obj.DONT_BREAK_DISCONNECTED = false; 
+
+            obj.RECT_DIMS = [40 40]; % [25 25]
             obj.arrangement = 'grid'; 
+            obj.grid_dims = [6 6];
+            obj.SEED_FRAME_WEIGHT = 1000; % 500 
+            
+            obj.upper_bp = 150; % 15, 15 is better than 100
+            obj.resize_factor = 0.5;
         end
         
         function obj = set_params(obj, par)

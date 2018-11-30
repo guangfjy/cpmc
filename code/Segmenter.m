@@ -103,7 +103,6 @@ classdef Segmenter
             obj = obj.set_params();
             obj.orig_I = obj.I;
             if(obj.resize_factor ~= 1)
-                obj.orig_I = obj.I;
                 obj.I = imresize(obj.I, obj.resize_factor);
                 obj.RECT_DIMS = ceil(obj.RECT_DIMS * obj.resize_factor);
             end            

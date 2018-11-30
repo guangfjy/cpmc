@@ -16,22 +16,21 @@ classdef LongRangeSegmenter < Segmenter
         function obj = LongRangeSegmenter(I, img_name)
             obj = obj@Segmenter(I,img_name);
             
-            obj.RECT_DIMS = [15 15]; % 15
-            obj.grid_dims = [6 6];
-
-            obj.upper_bp = 300; % 400
-            obj.SEED_FRAME_WEIGHT = 1000; % 1000 original
-            obj.MAX_ENERGY = 250; % 250
             obj.filter_segments = true;
-            obj.resize_factor = 0.5; %%%% important %%%%%%%%            
+            obj.MAX_ENERGY = 250; % 250
             obj.DONT_BREAK_DISCONNECTED = false;
-                        
+            
+            obj.RECT_DIMS = [15 15]; % 15
             % use FH segmentation algorithm to generate superpixels, then
             % place square seed in centers close to regular grid.
-            obj.arrangement = 'felzenszwalb';     
-            
+            obj.arrangement = 'felzenszwalb'; 
             % use just a regular grid
-            %obj.arrangement = 'grid';              
+            %obj.arrangement = 'grid'; 
+            obj.grid_dims = [6 6];
+            obj.SEED_FRAME_WEIGHT = 1000; % 1000 original
+
+            obj.upper_bp = 300; % 400
+            obj.resize_factor = 0.5; %%%% important %%%%%%%%
         end
 
         

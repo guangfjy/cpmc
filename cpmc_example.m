@@ -6,35 +6,37 @@ function cpmc_example()
     addpath('./external_code/immerge/');
     addpath('./external_code/color_sift/');
     addpath('./external_code/vlfeats/toolbox/kmeans/');
-    addpath('./external_code/vlfeats/toolbox/kmeans/');
     addpath('./external_code/vlfeats/toolbox/mex/mexa64/');
-    addpath('./external_code/vlfeats/toolbox/mex/mexglx/');
     addpath('./external_code/globalPb/lib/');
     addpath('./external_code/mpi-chi2-v1_5/');        
     
     % create multiple threads (set how many you have)
-    N_THREADS = 12;
     ncores=feature('numCores'); %CPU核心数
-    ncores = min(N_THREADS, ncores); %确定当前去处所需的核心数
+    if ncores < 2
+        error('the number of CPU cores is less than 2');
+    end
+    n = ncores - 1; %比实际核心小1个，避免系统交互被严重拖累
     p = gcp('nocreate'); %获取当前并行池信息
     if isempty(p)
         %并行池未打开，则打开
-        parpool(4);
+        p = parpool(n);
     else
         %并行池已打开，查看线程数
-        if p.NumWorkers ~= ncores
+        if p.NumWorkers ~= n
             %线程数不对，关闭重新打开
             delete(p);
-            parpool(ncores);
+            p = parpool(n);
         end
     end
+    fprintf(1, 'CPU核心数为%d，启用了%d个工作线程\n', ncores, p.NumWorkers);
 
     exp_dir = './data/';
-    %img_name = '2010_000238'; % airplane and people   
-    img_name = '2007_009084'; % dogs, motorbike, chairs, people    
+    img_name = '2010_000238'; % airplane and people   
+    %img_name = '2007_009084'; % dogs, motorbike, chairs, people    
     %img_name = '2010_002868'; % buses   
     %img_name = '2010_003781'; % cat, bottle, potted plants
-        
+    %img_name = 'test123';  %test crash 
+       
    [masks, scores] = cpmc(exp_dir, img_name);
             
     I = imread([exp_dir '/JPEGImages/' img_name '.jpg']);
@@ -47,7 +49,7 @@ function cpmc_example()
     SvmSegm_show_best_segments(I,Q,masks);
     
     % visualization and ground truth score for top 200 segments    
-    top_masks = masks(:,:,1:200);
+    top_masks = masks(:, :, 1:200);
     figure;
     disp('Best 200 segments after filtering');
     Q = SvmSegm_segment_quality(img_name, exp_dir, top_masks, 'overlap');

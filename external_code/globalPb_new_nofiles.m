@@ -32,7 +32,7 @@ im = double(I) / 255;
 orig_sz = [tx, ty];
 
 % default feature weights
-if nchan == 3,
+if nchan == 3
     weights = [ 0   0    0.0028    0.0041    0.0042    0.0047    0.0033    0.0033    0.0035    0.0025    0.0025    0.0137    0.0139];
 else
     weights = [ 0   0    0.0054         0         0         0         0         0         0    0.0048    0.0049    0.0264    0.0090];
