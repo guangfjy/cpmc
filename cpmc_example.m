@@ -40,6 +40,9 @@ function cpmc_example()
    [masks, scores] = cpmc(exp_dir, img_name);
             
     I = imread([exp_dir '/JPEGImages/' img_name '.jpg']);
+    
+    %save all for debug
+    save;
 
     % visualization and ground truth score for whole pool
     fprintf(['Best segments from initial pool of ' int2str(size(masks,3))]);
@@ -48,8 +51,8 @@ function cpmc_example()
     avg_best_overlap = mean(max([Q.q]))
     SvmSegm_show_best_segments(I,Q,masks);
     
-    % visualization and ground truth score for top 200 segments    
-    top_masks = masks(:, :, 1:200);
+    % visualization and ground truth score for top 200 segments
+    top_masks = masks(:, :, 1:min(200, size(masks, 3)));
     figure;
     disp('Best 200 segments after filtering');
     Q = SvmSegm_segment_quality(img_name, exp_dir, top_masks, 'overlap');
