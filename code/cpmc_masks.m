@@ -12,7 +12,7 @@ function [masks] = cpmc_masks(exp_dir, img_name, segm_pars)
     
     % extract initial pool
     dir_name = [exp_dir 'MySegmentsMat/' segm_pars.name];
-    if(~exist([exp_dir 'MySegmentsMat/' segm_pars.name], 'dir'))
+    if(~exist(dir_name, 'dir'))
         mkdir(dir_name);
     end
     

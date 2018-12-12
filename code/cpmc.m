@@ -48,7 +48,7 @@ function [masks, scores] = cpmc(exp_dir, img_name, diversify_const, segm_pars)
     DefaultVal('*segm_pars', '[]');
     
     if(isempty(segm_pars))
-        segm_pars.pb_folder = [exp_dir './PB/'];
+        segm_pars.pb_folder = [exp_dir 'PB/'];
         segm_pars.name = 'dummy_masks';
 
         % UniformSegmenter uses a uniform unary term. LongRangeSegmenter
@@ -125,7 +125,7 @@ function [masks, scores] = cpmc(exp_dir, img_name, diversify_const, segm_pars)
     % load ranker model (trained on training set of voc segmentation dataset)   
     % substitute train by trainval for images outside the segmentation validation set
     % of VOC2010.
-    load([exp_dir '/MySegmentRankers/' ranker_file]);
+    load([exp_dir 'MySegmentRankers/' ranker_file]);
     
     t = tic();
     disp('Starting feature extraction.');
